@@ -11,7 +11,7 @@
 -- =====================================================
 
 -- -------------------------
--- Query 1: JOIN (INNER JOIN)
+-- Query 1: JOIN
 -- Retrieve booking information along with:
 --   - Customer name
 --   - Vehicle name
@@ -23,18 +23,17 @@ SELECT
   b.start_date,
   b.end_date,
   b.status,
-  b.total_cost,
-  b.created_at
+  b.total_cost
 FROM bookings b
 INNER JOIN users u
   ON u.user_id = b.user_id
 INNER JOIN vehicles v
   ON v.vehicle_id = b.vehicle_id
-ORDER BY b.created_at DESC;
+ORDER BY b.end_date DESC;
 
 
 -- -------------------------
--- Query 2: NOT EXISTS
+-- Query 2: EXISTS
 -- Find all vehicles that have never been booked
 -- -------------------------
 SELECT
@@ -43,8 +42,8 @@ SELECT
   v.type,
   v.model,
   v.registration_number,
-  v.price_per_day,
-  v.availability_status
+  v.rental_price,
+  v.status
 FROM vehicles v
 WHERE NOT EXISTS (
   SELECT 1
@@ -53,11 +52,9 @@ WHERE NOT EXISTS (
 )
 ORDER BY v.vehicle_id;
 
-
 -- -------------------------
 -- Query 3: WHERE
 -- Retrieve all available vehicles of a specific type (e.g. cars)
--- Change 'CAR' to 'BIKE' or 'TRUCK' as needed.
 -- -------------------------
 SELECT
   v.vehicle_id,
@@ -65,12 +62,12 @@ SELECT
   v.type,
   v.model,
   v.registration_number,
-  v.price_per_day,
-  v.availability_status
+  v.rental_price,
+  v.status
 FROM vehicles v
-WHERE v.availability_status = 'AVAILABLE'
-  AND v.type = 'CAR'
-ORDER BY v.price_per_day ASC, v.vehicle_id;
+WHERE v.status = 'available'
+  AND v.type = 'car'
+ORDER BY v.rental_price ASC, v.vehicle_id;
 
 
 -- -------------------------

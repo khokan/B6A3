@@ -10,6 +10,22 @@ The system supports real-world rental scenarios:
 
 ---
 
+## ERD Diagram
+
+The Entity Relationship Diagram (ERD) visually represents the database structure, including tables, primary keys, foreign keys, and relationships between entities.
+
+🔗 **ERD Diagram Link:**  
+[View ERD Diagram](https://drawsql.app/teams/kk-168/diagrams/vehiclerentalsystem)
+
+### ERD Highlights
+- Three main entities: **users**, **vehicles**, and **bookings**
+- Clearly defined **Primary Keys (PK)** and **Foreign Keys (FK)** and and **unique Keys**
+- One-to-Many relationships:
+  - users → bookings
+  - vehicles → bookings
+
+---
+
 ## Database Schema (Logical Design)
 
 ### Tables
@@ -93,3 +109,4 @@ The system supports real-world rental scenarios:
 2. Execute the queries:
    ```bash
    psql -d your_database_name -f queries.sql
+
